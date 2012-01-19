@@ -21,8 +21,8 @@ public class CosmicShift extends JavaPlugin {
 	protected static String N;
 
 	public CosmicShift() {
-		this.logger = Logger.getLogger("XOXO");
-		N1 = "[CosmicShift] ";
+		this.logger = Logger.getLogger("CosmicShift");
+		N1 = "[CS] ";
 		N = ChatColor.GRAY + "[" + ChatColor.DARK_AQUA + "CS" + ChatColor.GRAY
 				+ "] ";
 	}

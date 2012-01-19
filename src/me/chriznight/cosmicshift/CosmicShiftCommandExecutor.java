@@ -98,7 +98,7 @@ public class CosmicShiftCommandExecutor implements CommandExecutor {
 				plugin.log(player.getName().toString() + " used /cs request");
 				return true;
 			} else if (args[0].equalsIgnoreCase("tp")) {
-				if (args.length == 0) {
+				if (args.length == 1) {
 					if (player == null) {
 						plugin.send(sender, "You can only run this in game!");
 						return true;
@@ -122,7 +122,7 @@ public class CosmicShiftCommandExecutor implements CommandExecutor {
 					player.teleport(target);
 					plugin.log(player.getName() + " used '/xtp me'");
 					return true;
-				} else if (args.length == 1) {
+				} else if (args.length == 2) {
 					if (!sender.hasPermission(Permissions.CTO)) {
 						plugin.send(sender,
 								"You don't have permission to run this command!");
