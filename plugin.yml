@@ -1,0 +1,33 @@
+name: CosmicShift
+main: me.chriznight.cosmicshift.CosmicShift
+version: '0.1'
+author: ChrizNight
+description: Nice and fast gamemode switching bukkit plugin.
+startup: postworld
+commands:
+  cs:
+    description: Shows all commands that are available.
+permissions:
+    cosmicshift.*:
+        description: Access to all commands
+        children:
+            cosmicshift.shift: true
+            cosmicshift.shift.other: true
+            cosmicshift.teleport: true
+            cosmicshift.teleport.other: true
+            cosmicshift.monitor: true
+    cosmicshift.shift:
+        description: Allows to change the gamemode
+        default: op
+    cosmicshift.shift.other:
+        description: Allows to change the gamemode of other players
+        default: op
+    cosmicshift.teleport:
+        description: Allows to teleport to the last player that changes his gamemode
+        default: op
+    cosmicshift.teleport.other:
+        description: Allows to teleport other players to the last player that changes his gamemode
+        default: op
+    cosmicshift.monitor:
+        description: Allows to see when someone changes his gamemode
+        default: op
