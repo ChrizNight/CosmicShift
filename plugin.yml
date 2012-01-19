@@ -1,6 +1,6 @@
 name: CosmicShift
 main: me.chriznight.cosmicshift.CosmicShift
-version: '0.1'
+version: '1.0'
 author: ChrizNight
 description: Nice and fast gamemode switching bukkit plugin.
 startup: postworld
