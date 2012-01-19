@@ -52,7 +52,8 @@ public class CosmicShiftCommandExecutor implements CommandExecutor {
 					plugin.log(player.getName() + " changed his gamemode to "
 							+ gm.toString());
 					return true;
-				} else if (args.length == 2) {
+				}
+				if (args.length == 2) {
 					if (!sender.hasPermission(Permissions.CSO)) {
 						plugin.send(sender,
 								"You don't have permission to run this command!");
@@ -60,8 +61,8 @@ public class CosmicShiftCommandExecutor implements CommandExecutor {
 					}
 					Player target = Bukkit.getPlayer(args[1]);
 					if (target == null) {
-						plugin.send(sender, "The target " + ChatColor.RED
-								+ args[0].toString() + ChatColor.GRAY
+						plugin.send(sender, "The player " + ChatColor.RED
+								+ args[1].toString() + ChatColor.GRAY
 								+ " is not available!");
 						return true;
 					}
@@ -84,7 +85,8 @@ public class CosmicShiftCommandExecutor implements CommandExecutor {
 							+ gm.toString());
 					return true;
 				}
-			} else if (args[0].equalsIgnoreCase("request") && !sender.isOp()
+			}
+			if (args[0].equalsIgnoreCase("request") && !sender.isOp()
 					&& !sender.hasPermission(Permissions.CS)
 					&& !sender.hasPermission(Permissions.CSO)
 					&& args.length == 1) {
@@ -97,7 +99,8 @@ public class CosmicShiftCommandExecutor implements CommandExecutor {
 				}
 				plugin.log(player.getName().toString() + " used /cs request");
 				return true;
-			} else if (args[0].equalsIgnoreCase("tp")) {
+			}
+			if (args[0].equalsIgnoreCase("tp")) {
 				if (args.length == 1) {
 					if (player == null) {
 						plugin.send(sender, "You can only run this in game!");
@@ -120,9 +123,10 @@ public class CosmicShiftCommandExecutor implements CommandExecutor {
 					plugin.send(player, "Teleporting to " + ChatColor.RED
 							+ target.getName().toString());
 					player.teleport(target);
-					plugin.log(player.getName() + " used '/xtp me'");
+					plugin.log(player.getName() + " used '/cs tp'");
 					return true;
-				} else if (args.length == 2) {
+				} 
+				if (args.length == 2) {
 					if (!sender.hasPermission(Permissions.CTO)) {
 						plugin.send(sender,
 								"You don't have permission to run this command!");
@@ -131,7 +135,11 @@ public class CosmicShiftCommandExecutor implements CommandExecutor {
 					Player target = CosmicShiftPlayerListener.target;
 					Player target1 = Bukkit.getPlayer(args[1]);
 					if (target == null) {
-						plugin.send(sender, "The target is not available!");
+						plugin.send(sender, "The target isn't available!");
+						return true;
+					}
+					if(target1 == null) {
+						plugin.send(sender, "The given player isn't available!");
 						return true;
 					}
 					if (target1 == target) {
@@ -143,7 +151,7 @@ public class CosmicShiftCommandExecutor implements CommandExecutor {
 							+ target.getName().toString());
 					target1.teleport(target);
 					if (sender instanceof Player)
-						plugin.log(sender.getName() + " used '/xtp <Player>'");
+						plugin.log(sender.getName() + " used '/cs tp <Player>'");
 					return true;
 				}
 			}
