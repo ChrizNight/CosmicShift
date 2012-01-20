@@ -15,11 +15,13 @@ import org.bukkit.entity.Player;
 public class CosmicShiftCommandExecutor implements CommandExecutor {
 	private CosmicShift plugin;
 	private GameMode gm;
+	private boolean req;
 	private final GameMode S = GameMode.SURVIVAL;
 	private final GameMode C = GameMode.CREATIVE;
 
 	public CosmicShiftCommandExecutor(CosmicShift plugin) {
 		this.plugin = plugin;
+		req = plugin.config.getBoolean("Shift.Allow requests");
 	}
 
 	@Override
@@ -86,19 +88,24 @@ public class CosmicShiftCommandExecutor implements CommandExecutor {
 					return true;
 				}
 			}
-			if (args[0].equalsIgnoreCase("request") && !sender.isOp()
-					&& !sender.hasPermission(Permissions.CS)
-					&& !sender.hasPermission(Permissions.CSO)
-					&& args.length == 1) {
-				for (Player p : player.getServer().getOnlinePlayers()) {
-					if (p.isOp()) {
-						plugin.send(p, ChatColor.RED
-								+ player.getName().toString() + ChatColor.GRAY
-								+ " requests for gamemode change");
+			if (req) {
+				if (args[0].equalsIgnoreCase("req") && !sender.isOp()
+						&& !sender.hasPermission(Permissions.CS)
+						&& !sender.hasPermission(Permissions.CSO)
+						&& args.length == 1) {
+					for (Player p : player.getServer().getOnlinePlayers()) {
+						if (p.isOp()) {
+							plugin.send(p, ChatColor.RED
+									+ player.getName().toString()
+									+ ChatColor.GRAY
+									+ " requests for gamemode change");
+						}
 					}
+					plugin.send(player, "Your request is being processed");
+					plugin.log(player.getName().toString()
+							+ " used /cs request");
+					return true;
 				}
-				plugin.log(player.getName().toString() + " used /cs request");
-				return true;
 			}
 			if (args[0].equalsIgnoreCase("tp")) {
 				if (args.length == 1) {
@@ -125,7 +132,7 @@ public class CosmicShiftCommandExecutor implements CommandExecutor {
 					player.teleport(target);
 					plugin.log(player.getName() + " used '/cs tp'");
 					return true;
-				} 
+				}
 				if (args.length == 2) {
 					if (!sender.hasPermission(Permissions.CTO)) {
 						plugin.send(sender,
@@ -138,7 +145,7 @@ public class CosmicShiftCommandExecutor implements CommandExecutor {
 						plugin.send(sender, "The target isn't available!");
 						return true;
 					}
-					if(target1 == null) {
+					if (target1 == null) {
 						plugin.send(sender, "The given player isn't available!");
 						return true;
 					}
@@ -197,8 +204,11 @@ public class CosmicShiftCommandExecutor implements CommandExecutor {
 		if (player.hasPermission(Permissions.CTO))
 			plugin.send(player, "to the last person that changed his gamemode");
 		if (!player.hasPermission(Permissions.CS)
-				&& !player.hasPermission(Permissions.CSO))
-			plugin.send(player, ChatColor.RED + "/cs request" + ChatColor.GRAY
+				&& !player.hasPermission(Permissions.CSO) && req
+				&& !player.isOp())
+			plugin.send(player, ChatColor.RED + "/cs req" + ChatColor.GRAY
 					+ " - Requests a gamemode change");
+		else
+			plugin.send(player, "There are no commands available for you");
 	}
 }

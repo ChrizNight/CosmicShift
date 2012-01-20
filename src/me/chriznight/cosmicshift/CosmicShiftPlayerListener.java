@@ -16,15 +16,27 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class CosmicShiftPlayerListener implements Listener {
 	private CosmicShift plugin;
 	private GameMode gm;
+	private boolean cancel;
 	public static Player target;
 
 	public CosmicShiftPlayerListener(CosmicShift instance) {
 		plugin = instance;
+		cancel = plugin.config.getBoolean("Shift.Disable the gamemode event");
 	}
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onPlayerGameModeChange(final PlayerGameModeChangeEvent event) {
 		Player player = event.getPlayer();
+		if (!player.hasPermission("cosmicshift.shift")
+				|| !player.hasPermission("cosmicshift.shift.other")
+				&& !player.isOp()) {
+			event.setCancelled(cancel);
+			if(event.isCancelled()) {
+				plugin.send(player,
+						"You don't have permission to run this command!");
+				plugin.log(event.getPlayer().getName() + " tried to change his gamemode!");
+			}
+		}
 		gm = event.getNewGameMode();
 		for (Player p : event.getPlayer().getServer().getOnlinePlayers()) {
 			if ((p.hasPermission(Permissions.CM)) && player != p
@@ -41,5 +53,4 @@ public class CosmicShiftPlayerListener implements Listener {
 	public void onPlayerQuit(PlayerQuitEvent event) {
 		target = null;
 	}
-
 }
