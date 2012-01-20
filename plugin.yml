@@ -8,7 +8,7 @@ commands:
   cs:
     description: Shows all commands that are available.
 permissions:
-    cosmicshit.*:
+    cosmicshift.*:
         description: Access to all commands
         children:
             cosmicshift.shift: true
