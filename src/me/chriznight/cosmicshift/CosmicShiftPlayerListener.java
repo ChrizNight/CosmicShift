@@ -37,7 +37,7 @@ public class CosmicShiftPlayerListener implements Listener {
 		target = event.getPlayer();
 	}
 
-	@EventHandler(priority = EventPriority.HIGH)
+	@EventHandler(priority = EventPriority.NORMAL)
 	public void onPlayerQuit(PlayerQuitEvent event) {
 		target = null;
 	}

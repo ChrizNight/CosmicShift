@@ -29,7 +29,7 @@ public class CosmicShiftCommandExecutor implements CommandExecutor {
 		if (sender instanceof Player) {
 			player = (Player) sender;
 		}
-		if (cmd.getName().equalsIgnoreCase("cs") && args.length > 0) {
+		if (cmd.getName().equalsIgnoreCase("c") && args.length > 0) {
 			if (args[0].equalsIgnoreCase("shift")) {
 				if (args.length == 1) {
 					if (player == null) {

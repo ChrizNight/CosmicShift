@@ -22,7 +22,7 @@ public class CosmicShift extends JavaPlugin {
 
 	public CosmicShift() {
 		this.logger = Logger.getLogger("CosmicShift");
-		N1 = "[CS] ";
+		N1 = "[C] ";
 		N = ChatColor.GRAY + "[" + ChatColor.DARK_AQUA + "CS" + ChatColor.GRAY
 				+ "] ";
 	}
