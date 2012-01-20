@@ -41,6 +41,7 @@ public class CosmicShift extends JavaPlugin {
 			config = getConfig();
 			File CosmicConfig = new File(getDataFolder() + "config.yml");
 			if(!CosmicConfig.exists()) {
+				config.options().header("Configuration of CosmicShift");
 				if (!config.contains("Shift.Allow requests")) {
 					config.set("Shift.Allow requests", true);
 				}
@@ -52,6 +53,8 @@ public class CosmicShift extends JavaPlugin {
 		} catch (Exception e) {
 			log(e.toString());
 		}
+		reloadConfig();
+		log("Succesfully loaded the config!");
 		PL = new CosmicShiftPlayerListener(this);
 		Bukkit.getServer().getPluginManager().registerEvents(PL, this);
 		CE = new CosmicShiftCommandExecutor(this);
